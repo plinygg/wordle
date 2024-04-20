@@ -17,7 +17,10 @@ while len(words) > 1:
             print('Choose a letter.')
         else:
             gray_list = []
-            words = [word for word in words if all(letter not in word for letter in every_letter_gray[1:])]
+            for word in words:
+                if all(letter not in word for letter in every_letter_gray[1:]):
+                    gray_list.append(word)
+            words = gray_list
             print('Words without letter(s) {a} have been removed.'.format(a=every_letter_gray[1:]))
     elif inputs.lower() == "words":
         print(words)
