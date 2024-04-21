@@ -4,9 +4,10 @@ words = []
 for number in range(5802):
     words.append(w.readline().strip('\n'))
 
-while len(words) > 1:
-    inputs = input('COMMANDS:\nGray(type "gray" followed by the letters)\nYellow(type "yellow" followed by the letter and where the letter is)\nGreen(type "green" followed by the letter and where the letter is)\nWords(prints the remaining words)\n')
-    if inputs.lower()[0:4] == "gray":
+while len(words) > 0:
+    inputs = input('COMMANDS:\n------------------------\nGray(type "gray" followed by the letters)\nYellow(type "yellow" followed by the letter and where the letter is)\nGreen(type "green" followed by the letter and where the letter is)\nWords(prints the remaining words)\nQuit to quit the finder\n------------------------\n')
+    first_input = inputs.lower().split()[0]
+    if first_input == "gray":
         every_letter_gray = inputs.lower().replace(",", " ").split(" ")
         for value in every_letter_gray[1:]:
             if value == '':
@@ -28,13 +29,18 @@ while len(words) > 1:
                 else:
                     string_of_letters = string_of_letters + ' ' + letter
             print('Words with letter(s){a} have been removed.'.format(a=string_of_letters))
-    elif inputs.lower() == "words":
+    elif first_input == "words":
         print(words)
         print("Words left to choose from: {a}".format(a=len(words)))
-    elif inputs.lower() == "yellow":
+    elif first_input == "yellow": # yellow f 5, g 3
+        letter_and_value = inputs.lower().split(',')[1:]
+    elif first_input == "green":
         pass
-    elif inputs.lower() == "green":
-        pass
+    elif first_input == "quit":
+        print('\nProgram ended.')
+        break
+    elif first_input == "skibidi":
+        print('\n\nskibidi fortnite\n-Isabella Alban\n')
     else:
         print('{a} is not a command. Choose a command:'.format(a=inputs))
 
