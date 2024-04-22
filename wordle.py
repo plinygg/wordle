@@ -34,11 +34,18 @@ while len(words) > 0:
         print("Words left to choose from: {a}".format(a=len(words)))
     elif first_input == "yellow": # yellow f 5, g 3
         letter_and_value = inputs.lower().split(',')
+        checker = inputs.lower().split(' ')
         print(letter_and_value)
-        if letter_and_value == first_input:
+        if len(checker) == 1:
             print('Please input a letter followed by where the yellow letter is. If there are multiple, please use a comma.')
         else:
-            letter_and_value = letter_and_value[1:]
+            letter_and_value = inputs.lower()[6:].split(',')
+            temp = []
+            for pair in letter_and_value:
+                pair = pair.strip()
+                temp.append(pair)
+            letter_and_value = temp
+            print(letter_and_value)
         for pair in letter_and_value:
             if not pair[0].isnumeric(): # if the first value in every pair is not a number:
                 pass
