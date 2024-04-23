@@ -88,6 +88,6 @@ while len(words) > 0:
         print('\nProgram ended.')
         break
     elif first_input == "skibidi":
-        print('\nskibidi fortnite\n-Isabella Alban\n\n')
+        print('\nskibidi fortnite\n-Isabella Alban, 4/22/2024\n\n')
     else:
         print('{a} is not a command. Choose a command:'.format(a=inputs))
