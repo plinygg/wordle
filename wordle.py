@@ -1,5 +1,4 @@
 import os
-os.chdir("D:\\vsprojects\\wordle solver\\wordle-1")
 w = open('fives.txt', 'r')
 
 words = []
