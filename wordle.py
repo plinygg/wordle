@@ -1,4 +1,5 @@
 import os
+from random import choice
 w = open('fives.txt', 'r')
 
 words = []
@@ -6,7 +7,7 @@ for number in range(5802):
     words.append(w.readline().strip('\n'))
 
 while len(words) > 0:
-    inputs = input('COMMANDS:\n------------------------\nGray(type "gray" followed by the letters)\nYellow(type "yellow" followed by the letter and where the letter is)\nGreen(type "green" followed by the letter and where the letter is)\nWords(prints the remaining words)\nQuit to quit the finder\n------------------------\n')
+    inputs = input('COMMANDS:\n------------------------\nGray(type "gray" followed by the letters)\nYellow(type "yellow" followed by the letter and where the letter is)\nGreen(type "green" followed by the letter and where the letter is)\nWords(prints the remaining words)\nChoice to make a random choice\nQuit to quit the finder\n------------------------\n')
     first_input = inputs.lower().split()[0]
     if first_input == "gray":
         every_letter_gray = inputs.lower().replace(",", " ").split(" ")
@@ -86,7 +87,7 @@ while len(words) > 0:
     elif first_input == "quit":
         print('\nProgram ended.')
         break
-    elif first_input == "skibidi":
-        print('\nskibidi fortnite\n-Isabella Alban, 4/22/2024\n\n')
+    elif first_input == "choice":
+        print(choice(words))
     else:
         print('{a} is not a command. Choose a command:'.format(a=inputs))
