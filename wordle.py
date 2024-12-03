@@ -5,9 +5,10 @@ w = open('fives.txt', 'r')
 words = []
 for number in range(5802):
     words.append(w.readline().strip('\n'))
-
+    
+stack = []
 while len(words) > 0:
-    inputs = input('COMMANDS:\n------------------------\nGray(type "gray" followed by the letters)\nYellow(type "yellow" followed by the letter and where the letter is)\nGreen(type "green" followed by the letter and where the letter is)\nWords(prints the remaining words)\nChoice to make a random choice\nQuit to quit the finder\n------------------------\n')
+    inputs = input('COMMANDS:\n------------------------\nGray(type "gray" followed by the letters)\nYellow(type "yellow" followed by the letter and where the letter is)\nGreen(type "green" followed by the letter and where the letter is)\nWords(prints the remaining words)\nChoice to make a random choice\nUndo to undo a move\nQuit to quit the finder\n------------------------\n')
     first_input = inputs.lower().split()[0]
     if first_input == "gray":
         every_letter_gray = inputs.lower().replace(",", " ").split(" ")
@@ -20,9 +21,13 @@ while len(words) > 0:
             print('Choose a letter.')
         else:
             gray_list = []
+            t = []
             for word in words:
                 if all(letter not in word for letter in every_letter_gray[1:]):
                     gray_list.append(word)
+                else:
+                    t.append(word)
+            stack.append(t)
             words = gray_list
             string_of_letters = ""
             for letter in every_letter_gray[1:]:
@@ -48,10 +53,14 @@ while len(words) > 0:
             letter_and_value = temp
             # print(letter_and_value)
         yellow_list = []
+        tt = []
         for word in words:
             if all(word[int(pair[-1])-1] != pair[0] for pair in letter_and_value) and all(pair[0] in word for pair in letter_and_value):
                     yellow_list.append(word)
+            else:
+                tt.append(word)
         words = yellow_list
+        stack.append(tt)
         letters = ""
         places = ""
         for pair in letter_and_value:
@@ -71,12 +80,16 @@ while len(words) > 0:
                 temp2.append(pair)
             letters_and_value = temp2
         green_list = []
+        ttt = []
         for word in words:
             if not pair[0].isnumeric():
                 if all(word[int(pair[-1])-1] == pair[0] for pair in letters_and_value):
                     green_list.append(word)
+                else:
+                    ttt.append(word)
             else:
                 print('Improper use of command.')
+        stack.append(ttt)
         words = green_list
         letters2 = ""
         places2 = ""
@@ -89,5 +102,14 @@ while len(words) > 0:
         break
     elif first_input == "choice":
         print(choice(words))
+    elif first_input == "undo":
+        if not stack:
+            print('There are no commands to undo.')
+        else:
+            w = stack.pop()
+            for word in w:
+                words.append(word)
+            print('The last action has been undone.')
+                
     else:
         print('{a} is not a command. Choose a command:'.format(a=inputs))
